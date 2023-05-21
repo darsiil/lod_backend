@@ -9,7 +9,10 @@ module.exports = router;
 router.post('/post', async (req, res) => {
     const data = new Model({
         name: req.body.name,
-        age: req.body.age
+        age: req.body.age,
+        subjects: req.body.subjects,
+        email: req.body.email,
+        photo: req.body.photo
     })
 
     try {
@@ -72,3 +75,14 @@ router.delete('/delete/:id', async (req, res) => {
         res.status(400).json({ message: error.message })
     }
 })
+
+//Get students by subject name
+router.get('/getStudents/:subject', async (req, res) => {
+    try {
+      const data = await Model.find({ subjects: { $elemMatch: { $eq: req.params.subject } } });
+      res.json(data)
+    }
+    catch (error) {
+      res.status(500).json({message: error.message})
+    }
+  })

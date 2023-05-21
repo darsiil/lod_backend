@@ -8,7 +8,19 @@ const dataSchema = new mongoose.Schema({
     age: {
         required: true,
         type: Number
-    }
+    },
+    subjects: {
+        required: true,
+        type: Array
+    },
+    email: {
+        required: true,
+        type: String
+    },
+    photo: {
+        required: true,
+        type: String
+    },
 })
 
 module.exports = mongoose.model('Data', dataSchema)
