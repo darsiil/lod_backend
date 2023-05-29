@@ -86,3 +86,14 @@ router.get('/getStudents/:subject', async (req, res) => {
       res.status(500).json({message: error.message})
     }
   })
+ 
+  //Get students by email
+router.get('/getStudentsByEmail/:email', async (req, res) => {
+    try {
+      const data = await Model.find({ email:  { $eq: req.params.email } });
+      res.json(data)
+    }
+    catch (error) {
+      res.status(500).json({message: error.message})
+    }
+  })
